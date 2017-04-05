@@ -1,0 +1,142 @@
+<!doctype html>
+<html ng-app="sewa.toolkit" ng-controller="ToolkitController as toolkit">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-sanitize.js"></script>
+    <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+    <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
+    <script src="app.js"></script>
+    <script src="main.controller.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <style type="text/css">
+    .bs-header {
+      padding: 30px 15px 40px; /* side padding builds on .container 15px, so 30px */
+      font-size: 16px;
+      text-align: center;
+      text-shadow: 0 1px 0 rgba(0,0,0,.15);
+      color: #cdbfe3;
+      background-color: #563d7c;
+      background-image: url(docs/header.png);
+    }
+    .d-select {
+      margin-bottom: 5px;
+    }
+    .d-select select {
+      width: 100px;
+    }
+    .designer-top-panel {
+      background-image: url(docs/pipl.png);
+      background-repeat: no-repeat;
+    }
+    .designer-pane {
+      position: relative;
+    }
+    .designer-pane .slot-action {
+      position: absolute;
+      width: 45px;
+      height: 45px;
+      background: #eee;
+      -webkit-box-shadow: inset 0px 0px 1px 3px rgba(0,0,0,0.81);
+      -moz-box-shadow: inset 0px 0px 1px 3px rgba(0,0,0,0.81);
+      box-shadow: inset 0px 0px 1px 3px rgba(0,0,0,0.81);
+    }
+    #armour.slot {
+      top: 70px;
+      left: 122px;
+    }
+    #weapon1.slot {
+      top: 70px;
+      left: 57px;
+    }
+    #weapon2.slot {
+      top: 70px;
+      left: 187px;
+    }
+  </style>
+  </head>
+  <body>
+    <div role="main">
+      <header class="bs-header text-center" id="overview">
+        <div class="container">
+            <h1>
+                SEWA Almigthy
+            </h1>
+        </div>
+      </header>
+      <div class="container">
+        <div class="panel panel-default">
+          <div class="panel-heading">Unit Designer</div>
+          <div class="panel-body designer-top-panel">
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="designer-pane">
+    <div id="armour" class="slot" uib-dropdown is-open="toolkit.status.isopen">
+      <button class="slot-action" type="button" uib-dropdown-toggle ng-disabled="disabled">
+      </button>
+      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="armour">
+        <li role="menuitem"><a href="#">No armor</a></li>
+        <li role="menuitem"><a href="#">Light armor</a></li>
+        <li role="menuitem"><a href="#">Heavy armor</a></li>
+      </ul>
+    </div>
+                  <div id="weapon1" class="slot"></div>
+                  <div id="weapon2" class="slot"></div>
+                </div>
+              </div>
+              <div class="col-sm-3">
+                <div class="d-select">
+                  <select>
+                    <option>Human</option>
+                    <option>Elf</option>
+                    <option>Dwarf</option>
+                    <option>Orc</option>
+                  </select>
+                  Preferred Race
+                </div>
+                <div class="d-select">
+                  <select>
+                    <option>Recruit</option>
+                    <option>Seasoned</option>
+                    <option>Regular</option>
+                    <option>Veteran</option>
+                    <option>Elite</option>
+                  </select>
+                  Training Level
+                </div>
+                <div class="d-select">
+                  <select>
+                    <option>Strength</option>
+                    <option>Endurance</option>
+                    <option>Wisdom</option>
+                    <option>Agility</option>
+                  </select>
+                  Training Focus
+                </div>
+              </div>
+              <div class="col-sm-5">
+                <div class="panel panel-default">
+                  <div class="panel-heading">Stats</div>
+                  <div class="panel-body">
+                    <p>Attack</p>
+                    <p>Defence</p>
+                    <p>Health</p>
+                    <p>Attack</p>
+                    <p>Defence</p>
+                    <p>Health</p>
+                    <p>Attack</p>
+                    <p>Defence</p>
+                    <p>Health</p>
+                    <p>Attack</p>
+                    <p>Defence</p>
+                    <p>Health</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
