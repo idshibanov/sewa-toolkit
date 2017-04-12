@@ -6,8 +6,10 @@
       'toastr',
       'ngAnimate',
       'ngSanitize',
-      'ui.bootstrap'
+      'ui.bootstrap',
+      'sewa.toolkit.controller'
     ])
+    .constant('_', window._)
     .constant('SEWA', {
       'param': 'value'
     })

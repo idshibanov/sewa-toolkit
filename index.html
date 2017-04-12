@@ -6,8 +6,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-sanitize.js"></script>
     <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
     <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
+    <script src="bower_components/lodash/dist/lodash.min.js"></script>
     <script src="app.js"></script>
+    <script src="main.constants.js"></script>
     <script src="main.controller.js"></script>
+    <script src="main.service.js"></script>
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
   <style type="text/css">
     .bs-header {
@@ -52,6 +55,13 @@
     #weapon2.slot {
       top: 70px;
       left: 187px;
+    }
+    
+    .changeUp {
+      color: green;
+    }
+    .changeDown {
+      color: red;
     }
   </style>
   </head>
@@ -118,21 +128,58 @@
                 <div class="panel panel-default">
                   <div class="panel-heading">Stats</div>
                   <div class="panel-body">
-                    <p>Attack</p>
-                    <p>Defence</p>
-                    <p>Health</p>
-                    <p>Attack</p>
-                    <p>Defence</p>
-                    <p>Health</p>
-                    <p>Attack</p>
-                    <p>Defence</p>
-                    <p>Health</p>
-                    <p>Attack</p>
-                    <p>Defence</p>
-                    <p>Health</p>
+                    <div class="row text-center">
+                      <div class="col-sm-12">{{toolkit.unit.name}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-3">STR: {{toolkit.unit.stats.str}}</div>
+                      <div class="col-sm-3">END: {{toolkit.unit.stats.end}}</div>
+                      <div class="col-sm-3">WIS: {{toolkit.unit.stats.wis}}</div>
+                      <div class="col-sm-3">AGI: {{toolkit.unit.stats.agi}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">Figures: {{toolkit.unit.figures}}</div>
+                      <div class="col-sm-3">Cost: {{toolkit.unit.cost}}</div>
+                      <div class="col-sm-3">Upkeep: {{toolkit.unit.upkeep}}</div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-sm-6">Health: {{toolkit.unit.hp_max}} ({{toolkit.unit.hp_max * toolkit.unit.figures}})</div>
+                      <div class="col-sm-6">Current: {{toolkit.unit.hp_current}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">Hit Chance: {{toolkit.unit.to_hit}}%</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">Melee:
+                      {{toolkit.unit.melee_attacks}} ({{toolkit.unit.melee_attacks * toolkit.unit.figures}}),
+                      {{toolkit.unit.melee_attacks * toolkit.unit.melee_damage * toolkit.unit.to_hit / 200}} - {{toolkit.unit.melee_attacks * toolkit.unit.melee_damage * toolkit.unit.to_hit / 50}}
+                      </div>
+                      <div class="col-sm-6">Ranged: 0</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">Defence: {{toolkit.unit.defence}}</div>
+                      <div class="col-sm-6">Resistance: {{toolkit.unit.resistance}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">Encumbrance: {{toolkit.unit.weight}}/{{toolkit.unit.encumbrance}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">Initiative: {{toolkit.unit.initiative}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">Movement: {{toolkit.unit.movement}} ({{toolkit.unit.movement_type}})</div>
+                    </div>
+                    <hr>
+                    <pre>{{toolkit.unit | json}}</pre>
                   </div>
                 </div>
               </div>
+            </div>
+            <div class="row">
+                <pre>
+                {{toolkit.combatlog}}
+                </pre>
             </div>
           </div>
         </div>
