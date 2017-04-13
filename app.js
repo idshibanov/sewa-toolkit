@@ -6,6 +6,7 @@
       'toastr',
       'ngAnimate',
       'ngSanitize',
+      'ngFileUpload',
       'ui.bootstrap',
       'sewa.toolkit.controller'
     ])

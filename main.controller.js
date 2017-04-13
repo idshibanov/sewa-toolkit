@@ -2,12 +2,15 @@
   'use strict';
 
   angular
-    .module('sewa.toolkit.controller', ['sewa.toolkit.service'])
+    .module('sewa.toolkit.controller', [
+      'sewa.toolkit.service',
+      'sewa.saveload.service'
+    ])
     .controller('ToolkitController', ToolkitController);
 
-  ToolkitController.$inject = ['$scope', 'ToolkitService', '_'];
+  ToolkitController.$inject = ['_', '$scope', 'ToolkitService', 'SaveLoadService'];
 
-  function ToolkitController($scope, ToolkitService, _) {
+  function ToolkitController(_, $scope, ToolkitService, SaveLoadService) {
     var vm = this;
     
     vm.status = {
@@ -46,9 +49,20 @@
     
     vm.combatlog = ToolkitService.runDuel(vm.unit, vm.unit2);
     
+    vm.unitUpload = function (file) {
+      if (file) {
+        SaveLoadService.loadFile(file, $scope).then(function(result) {
+            vm.unit3 = SaveLoadService.parseJson(result);
+            console.log(vm.unit3);
+          });
+      }
+    };
+    
+    //SaveLoadService.saveJson(vm.unit);
+    
     function initiateMelee(aUnit, dUnit, env) {
       
-    }
+    };
   }
 
 })();

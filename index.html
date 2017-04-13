@@ -6,11 +6,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-sanitize.js"></script>
     <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
     <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
+    <script src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
     <script src="bower_components/lodash/dist/lodash.min.js"></script>
     <script src="app.js"></script>
     <script src="main.constants.js"></script>
     <script src="main.controller.js"></script>
     <script src="main.service.js"></script>
+    <script src="saveload.service.js"></script>
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
   <style type="text/css">
     .bs-header {
@@ -177,6 +179,8 @@
               </div>
             </div>
             <div class="row">
+                Upload right away after file selection:
+                <div class="button" ngf-select="toolkit.unitUpload($file)">Upload on file select</div>
                 <pre>
                 {{toolkit.combatlog}}
                 </pre>
