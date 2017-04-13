@@ -23,6 +23,7 @@
       color: #cdbfe3;
       background-color: #563d7c;
       background-image: url(docs/header.png);
+      margin-bottom: 15px;
     }
     .d-select {
       margin-bottom: 5px;
@@ -30,12 +31,11 @@
     .d-select select {
       width: 100px;
     }
-    .designer-top-panel {
+    .designer-pane {
       background-image: url(docs/pipl.png);
       background-repeat: no-repeat;
-    }
-    .designer-pane {
       position: relative;
+      height: 300px;
     }
     .designer-pane .slot-action {
       position: absolute;
@@ -47,16 +47,16 @@
       box-shadow: inset 0px 0px 1px 3px rgba(0,0,0,0.81);
     }
     #armour.slot {
-      top: 70px;
-      left: 122px;
+      top: 80px;
+      left: 140px;
     }
-    #weapon1.slot {
-      top: 70px;
-      left: 57px;
+    #primary.slot {
+      top: 80px;
+      left: 65px;
     }
-    #weapon2.slot {
-      top: 70px;
-      left: 187px;
+    #secondary.slot {
+      top: 80px;
+      left: 215px;
     }
     
     .changeUp {
@@ -64,6 +64,11 @@
     }
     .changeDown {
       color: red;
+    }
+    
+    .row.top-level {
+      padding: 10px;
+      padding-top: 20px;
     }
   </style>
   </head>
@@ -77,24 +82,35 @@
         </div>
       </header>
       <div class="container">
-        <div class="panel panel-default">
-          <div class="panel-heading">Unit Designer</div>
-          <div class="panel-body designer-top-panel">
-            <div class="row">
-              <div class="col-sm-4">
+        <uib-tabset active="active">
+          <uib-tab index="0" heading="Unit Designer">
+            <div class="row top-level">
+              <div class="col-sm-5">
                 <div class="designer-pane">
-    <div id="armour" class="slot" uib-dropdown is-open="toolkit.status.isopen">
-      <button class="slot-action" type="button" uib-dropdown-toggle ng-disabled="disabled">
-      </button>
-      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="armour">
-        <li role="menuitem"><a href="#">No armor</a></li>
-        <li role="menuitem"><a href="#">Light armor</a></li>
-        <li role="menuitem"><a href="#">Heavy armor</a></li>
-      </ul>
-    </div>
-                  <div id="weapon1" class="slot"></div>
-                  <div id="weapon2" class="slot"></div>
+                  <div id="primary" class="slot" uib-dropdown is-open="toolkit.status.primaryOpen">
+                    <button class="slot-action" type="button" uib-dropdown-toggle ng-disabled="disabled">
+                    </button>
+                    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="primary">
+                      <li ng-repeat="eq in toolkit.equipment.primary track by $index" role="menuitem"><a href="#">{{eq.cost}}</a></li>
+                    </ul>
+                  </div>
+                  <div id="armour" class="slot" uib-dropdown is-open="toolkit.status.armourOpen">
+                    <button class="slot-action" type="button" uib-dropdown-toggle ng-disabled="disabled">
+                    </button>
+                    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="armour">
+                      <li ng-repeat="eq in toolkit.equipment.armour track by $index" role="menuitem"><a href="#">{{eq.cost}}</a></li>
+                    </ul>
+                  </div>
+                  <div id="secondary" class="slot" uib-dropdown is-open="toolkit.status.secondaryOpen">
+                    <button class="slot-action" type="button" uib-dropdown-toggle ng-disabled="disabled">
+                    </button>
+                    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="secondary">
+                      <li ng-repeat="eq in toolkit.equipment.secondary track by $index" role="menuitem"><a href="#">{{eq.cost}}</a></li>
+                    </ul>
+                  </div>
                 </div>
+                <div class="btn btn-primary" ng-click="toolkit.saveTemplates()">Save templates</div>
+                <div class="btn btn-primary" ngf-select="toolkit.loadTemplates($file)">Upload templates</div>
               </div>
               <div class="col-sm-3">
                 <div class="d-select">
@@ -126,7 +142,7 @@
                   Training Focus
                 </div>
               </div>
-              <div class="col-sm-5">
+              <div class="col-sm-4">
                 <div class="panel panel-default">
                   <div class="panel-heading">Stats</div>
                   <div class="panel-body">
@@ -178,15 +194,228 @@
                 </div>
               </div>
             </div>
-            <div class="row">
-                Upload right away after file selection:
-                <div class="button" ngf-select="toolkit.unitUpload($file)">Upload on file select</div>
+          </uib-tab>
+          <uib-tab index="1" heading="Unit Balancer">
+            <div class="row top-level">
+              <div class="col-sm-3">
+                <div class="panel panel-default">
+                  <div class="panel-heading">Stats</div>
+                  <div class="panel-body">
+                    <div class="row text-center">
+                      <div class="d-select">
+                        <label for="attackerSelect">Attacker:</label>
+                        <select name="attackerSelect" id="attackerSelect" ng-model="toolkit.unit1">
+                          <option ng-repeat="unit in toolkit.templates" value="{{unit.id}}">{{unit.name}}</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-3">STR: {{toolkit.unit.stats.str}}</div>
+                      <div class="col-sm-3">END: {{toolkit.unit.stats.end}}</div>
+                      <div class="col-sm-3">WIS: {{toolkit.unit.stats.wis}}</div>
+                      <div class="col-sm-3">AGI: {{toolkit.unit.stats.agi}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">Figures: {{toolkit.unit.figures}}</div>
+                      <div class="col-sm-3">Cost: {{toolkit.unit.cost}}</div>
+                      <div class="col-sm-3">Upkeep: {{toolkit.unit.upkeep}}</div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-sm-6">Health: {{toolkit.unit.hp_max}} ({{toolkit.unit.hp_max * toolkit.unit.figures}})</div>
+                      <div class="col-sm-6">Current: {{toolkit.unit.hp_current}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">Hit Chance: {{toolkit.unit.to_hit}}%</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">Melee:
+                      {{toolkit.unit.melee_attacks}} ({{toolkit.unit.melee_attacks * toolkit.unit.figures}}),
+                      {{toolkit.unit.melee_attacks * toolkit.unit.melee_damage * toolkit.unit.to_hit / 200}} - {{toolkit.unit.melee_attacks * toolkit.unit.melee_damage * toolkit.unit.to_hit / 50}}
+                      </div>
+                      <div class="col-sm-6">Ranged: 0</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">Defence: {{toolkit.unit.defence}}</div>
+                      <div class="col-sm-6">Resistance: {{toolkit.unit.resistance}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">Encumbrance: {{toolkit.unit.weight}}/{{toolkit.unit.encumbrance}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">Initiative: {{toolkit.unit.initiative}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">Movement: {{toolkit.unit.movement}} ({{toolkit.unit.movement_type}})</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
                 <pre>
                 {{toolkit.combatlog}}
                 </pre>
+              </div>
+              <div class="col-sm-3">
+                <div class="panel panel-default">
+                  <div class="panel-heading">Stats</div>
+                  <div class="panel-body">
+                    <div class="row text-center">
+                      <div class="col-sm-12">{{toolkit.unit.name}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-3">STR: {{toolkit.unit.stats.str}}</div>
+                      <div class="col-sm-3">END: {{toolkit.unit.stats.end}}</div>
+                      <div class="col-sm-3">WIS: {{toolkit.unit.stats.wis}}</div>
+                      <div class="col-sm-3">AGI: {{toolkit.unit.stats.agi}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">Figures: {{toolkit.unit.figures}}</div>
+                      <div class="col-sm-3">Cost: {{toolkit.unit.cost}}</div>
+                      <div class="col-sm-3">Upkeep: {{toolkit.unit.upkeep}}</div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-sm-6">Health: {{toolkit.unit.hp_max}} ({{toolkit.unit.hp_max * toolkit.unit.figures}})</div>
+                      <div class="col-sm-6">Current: {{toolkit.unit.hp_current}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">Hit Chance: {{toolkit.unit.to_hit}}%</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">Melee:
+                      {{toolkit.unit.melee_attacks}} ({{toolkit.unit.melee_attacks * toolkit.unit.figures}}),
+                      {{toolkit.unit.melee_attacks * toolkit.unit.melee_damage * toolkit.unit.to_hit / 200}} - {{toolkit.unit.melee_attacks * toolkit.unit.melee_damage * toolkit.unit.to_hit / 50}}
+                      </div>
+                      <div class="col-sm-6">Ranged: 0</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">Defence: {{toolkit.unit.defence}}</div>
+                      <div class="col-sm-6">Resistance: {{toolkit.unit.resistance}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">Encumbrance: {{toolkit.unit.weight}}/{{toolkit.unit.encumbrance}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">Initiative: {{toolkit.unit.initiative}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">Movement: {{toolkit.unit.movement}} ({{toolkit.unit.movement_type}})</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          </uib-tab>
+          <uib-tab index="2" heading="Skirmish Mode">
+
+            <div class="row top-level">
+              <div class="col-sm-3">
+                <div class="panel panel-default">
+                  <div class="panel-heading">Stats</div>
+                  <div class="panel-body">
+                    <div class="row text-center">
+                      <div class="col-sm-12">{{toolkit.unit.name}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-3">STR: {{toolkit.unit.stats.str}}</div>
+                      <div class="col-sm-3">END: {{toolkit.unit.stats.end}}</div>
+                      <div class="col-sm-3">WIS: {{toolkit.unit.stats.wis}}</div>
+                      <div class="col-sm-3">AGI: {{toolkit.unit.stats.agi}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">Figures: {{toolkit.unit.figures}}</div>
+                      <div class="col-sm-3">Cost: {{toolkit.unit.cost}}</div>
+                      <div class="col-sm-3">Upkeep: {{toolkit.unit.upkeep}}</div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-sm-6">Health: {{toolkit.unit.hp_max}} ({{toolkit.unit.hp_max * toolkit.unit.figures}})</div>
+                      <div class="col-sm-6">Current: {{toolkit.unit.hp_current}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">Hit Chance: {{toolkit.unit.to_hit}}%</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">Melee:
+                      {{toolkit.unit.melee_attacks}} ({{toolkit.unit.melee_attacks * toolkit.unit.figures}}),
+                      {{toolkit.unit.melee_attacks * toolkit.unit.melee_damage * toolkit.unit.to_hit / 200}} - {{toolkit.unit.melee_attacks * toolkit.unit.melee_damage * toolkit.unit.to_hit / 50}}
+                      </div>
+                      <div class="col-sm-6">Ranged: 0</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">Defence: {{toolkit.unit.defence}}</div>
+                      <div class="col-sm-6">Resistance: {{toolkit.unit.resistance}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">Encumbrance: {{toolkit.unit.weight}}/{{toolkit.unit.encumbrance}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">Initiative: {{toolkit.unit.initiative}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">Movement: {{toolkit.unit.movement}} ({{toolkit.unit.movement_type}})</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <pre>
+                {{toolkit.combatlog}}
+                </pre>
+              </div>
+              <div class="col-sm-3">
+                <div class="panel panel-default">
+                  <div class="panel-heading">Stats</div>
+                  <div class="panel-body">
+                    <div class="row text-center">
+                      <div class="col-sm-12">{{toolkit.unit.name}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-3">STR: {{toolkit.unit.stats.str}}</div>
+                      <div class="col-sm-3">END: {{toolkit.unit.stats.end}}</div>
+                      <div class="col-sm-3">WIS: {{toolkit.unit.stats.wis}}</div>
+                      <div class="col-sm-3">AGI: {{toolkit.unit.stats.agi}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">Figures: {{toolkit.unit.figures}}</div>
+                      <div class="col-sm-3">Cost: {{toolkit.unit.cost}}</div>
+                      <div class="col-sm-3">Upkeep: {{toolkit.unit.upkeep}}</div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-sm-6">Health: {{toolkit.unit.hp_max}} ({{toolkit.unit.hp_max * toolkit.unit.figures}})</div>
+                      <div class="col-sm-6">Current: {{toolkit.unit.hp_current}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">Hit Chance: {{toolkit.unit.to_hit}}%</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">Melee:
+                      {{toolkit.unit.melee_attacks}} ({{toolkit.unit.melee_attacks * toolkit.unit.figures}}),
+                      {{toolkit.unit.melee_attacks * toolkit.unit.melee_damage * toolkit.unit.to_hit / 200}} - {{toolkit.unit.melee_attacks * toolkit.unit.melee_damage * toolkit.unit.to_hit / 50}}
+                      </div>
+                      <div class="col-sm-6">Ranged: 0</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">Defence: {{toolkit.unit.defence}}</div>
+                      <div class="col-sm-6">Resistance: {{toolkit.unit.resistance}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">Encumbrance: {{toolkit.unit.weight}}/{{toolkit.unit.encumbrance}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">Initiative: {{toolkit.unit.initiative}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">Movement: {{toolkit.unit.movement}} ({{toolkit.unit.movement_type}})</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>          
+          </uib-tab>
+        </uib-tabset>
       </div>
     </div>
   </body>

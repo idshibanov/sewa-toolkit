@@ -104,6 +104,9 @@
         
         return unit;
       },
+      getEquipmentList() {
+        return TOOLKIT_CONSTANTS.equipment;
+      },
       getPrimary(template) {
         return TOOLKIT_CONSTANTS.equipment.primary[template.equipment.primary];
       },

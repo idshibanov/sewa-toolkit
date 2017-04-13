@@ -48,17 +48,21 @@
     console.log(vm.unit);
     
     vm.combatlog = ToolkitService.runDuel(vm.unit, vm.unit2);
+    vm.equipment = ToolkitService.getEquipmentList();
     
-    vm.unitUpload = function (file) {
+    vm.saveTemplates = function () {
+      SaveLoadService.saveJson(vm.unit);
+    };
+    
+    vm.loadTemplates = function (file) {
       if (file) {
-        SaveLoadService.loadFile(file, $scope).then(function(result) {
+        SaveLoadService.loadFile(file, $scope)
+          .then(function(result) {
             vm.unit3 = SaveLoadService.parseJson(result);
             console.log(vm.unit3);
           });
       }
     };
-    
-    //SaveLoadService.saveJson(vm.unit);
     
     function initiateMelee(aUnit, dUnit, env) {
       
