@@ -8,11 +8,14 @@
     <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
     <script src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
     <script src="bower_components/lodash/dist/lodash.min.js"></script>
-    <script src="app.js"></script>
-    <script src="main.constants.js"></script>
-    <script src="main.controller.js"></script>
-    <script src="main.service.js"></script>
-    <script src="saveload.service.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/balancer.controller.js"></script>
+    <script src="app/designer.controller.js"></script>
+    <script src="app/force.controller.js"></script>
+    <script src="app/main.constants.js"></script>
+    <script src="app/main.controller.js"></script>
+    <script src="app/main.service.js"></script>
+    <script src="app/saveload.service.js"></script>
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
   <style type="text/css">
     .bs-header {
@@ -84,28 +87,28 @@
       <div class="container">
         <uib-tabset active="active">
           <uib-tab index="0" heading="Unit Designer">
-            <div class="row top-level">
+            <div class="row top-level" ng-controller="UnitDesignerController as designer">
               <div class="col-sm-5">
                 <div class="designer-pane">
-                  <div id="primary" class="slot" uib-dropdown is-open="toolkit.status.primaryOpen">
+                  <div id="primary" class="slot" uib-dropdown is-open="designer.slotStatus.primaryOpen">
                     <button class="slot-action" type="button" uib-dropdown-toggle ng-disabled="disabled">
                     </button>
                     <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="primary">
-                      <li ng-repeat="eq in toolkit.equipment.primary track by $index" role="menuitem"><a href="#">{{eq.cost}}</a></li>
+                      <li ng-repeat="eq in designer.reference.equipment.primary track by $index" role="menuitem"><a href="#">{{eq.name}}</a></li>
                     </ul>
                   </div>
-                  <div id="armour" class="slot" uib-dropdown is-open="toolkit.status.armourOpen">
+                  <div id="armour" class="slot" uib-dropdown is-open="designer.slotStatus.armourOpen">
                     <button class="slot-action" type="button" uib-dropdown-toggle ng-disabled="disabled">
                     </button>
                     <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="armour">
-                      <li ng-repeat="eq in toolkit.equipment.armour track by $index" role="menuitem"><a href="#">{{eq.cost}}</a></li>
+                      <li ng-repeat="eq in designer.reference.equipment.armour track by $index" role="menuitem"><a href="#">{{eq.name}}</a></li>
                     </ul>
                   </div>
-                  <div id="secondary" class="slot" uib-dropdown is-open="toolkit.status.secondaryOpen">
+                  <div id="secondary" class="slot" uib-dropdown is-open="designer.slotStatus.secondaryOpen">
                     <button class="slot-action" type="button" uib-dropdown-toggle ng-disabled="disabled">
                     </button>
                     <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="secondary">
-                      <li ng-repeat="eq in toolkit.equipment.secondary track by $index" role="menuitem"><a href="#">{{eq.cost}}</a></li>
+                      <li ng-repeat="eq in designer.reference.equipment.secondary track by $index" role="menuitem"><a href="#">{{eq.name}}</a></li>
                     </ul>
                   </div>
                 </div>
@@ -196,7 +199,7 @@
             </div>
           </uib-tab>
           <uib-tab index="1" heading="Unit Balancer">
-            <div class="row top-level">
+            <div class="row top-level" ng-controller="UnitBalancerController as balancer">
               <div class="col-sm-3">
                 <div class="panel panel-default">
                   <div class="panel-heading">Stats</div>
@@ -308,8 +311,7 @@
             </div>
           </uib-tab>
           <uib-tab index="2" heading="Skirmish Mode">
-
-            <div class="row top-level">
+            <div class="row top-level" ng-controller="ForceController as force">
               <div class="col-sm-3">
                 <div class="panel panel-default">
                   <div class="panel-heading">Stats</div>

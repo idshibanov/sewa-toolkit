@@ -1,48 +1,6 @@
 (function() {
   'use strict';
-  /*
-  'full_unit' : {
-    'template' : 'infantry',
-    'race' : 'high_men',
-    'figures' : 6,
-    'cost' : 20,
-    'upkeep' : 1,
-    'experience' : 50,
-    'str' : 5,
-    'end' : 5,
-    'wis' : 5,
-    'agi' : 5,
-    'hp_hearts' : 1,
-    'hp_max' : 5,
-    'hp_current' : 1,
-    'melee_damage' : 5,
-    'melee_attacks' : 3,
-    'to_hit' : 0.3,
-    'defence' : 2,
-    'resistance' : 4,
-    'movement' : 1,
-    'movement_type' : 'land',
-    'initiative' : 5,
-    'encumbrance' : 100,
-    'traits' : {
-      'large_shield' : 1,
-    }
-  },
-  'swordmen' : {
-    'template' : 'infantry',
-    'race' : 'high_men',
-    'experience' : 50,
-    'equipment' : {
-      'weapon1' : 'common_sword',
-      'weapon2' : 'large_shield',
-      'armour' : 'light',
-      'mount' : 'none',
-    },
-    'traits' : {
-      'large_shield' : 1,
-    }
-  },
-  */  
+  
   angular
     .module('sewa.toolkit.constants', [])
     .constant('TOOLKIT_CONSTANTS', {
@@ -75,12 +33,14 @@
       'equipment' : {
         'primary' : {
           'knife' : {
+            'name' : 'Knife',
             'weight' : 5,
             'cost' : 0,
             'melee_damage' : 5,
             'melee_attacks' : 1
           },
           'common_spear' : {
+            'name' : 'Common Spear',
             'weight' : 40,
             'cost' : 5,
             'melee_damage' : 5,
@@ -88,6 +48,7 @@
             'bonus_defence' : 1,
           },
           'common_sword' : {
+            'name' : 'Common Sword',
             'weight' : 15,
             'cost' : 10,
             'melee_damage' : 5,
@@ -101,6 +62,7 @@
         },
         'secondary' : {
           'short_bow' : {
+            'name' : 'Short Bow',
             'weight' : 40,
             'cost' : 20,
             'ranged_type' : 'missile',
@@ -109,6 +71,7 @@
             'traits' : ['ammo8']
           },
           'large_shield' : {
+            'name' : 'Large Shield',
             'weight' : 10,
             'cost' : 10,
             'defence' : 1,
@@ -117,21 +80,25 @@
         },
         'armour' : {
           'none' : {
+            'name' : 'Common Cloth',
             'defence' : 1,
             'weight' : 10,
             'cost' : 0,
           },
           'light' : {
+            'name' : 'Leather Armour',
             'defence' : 2,
             'weight' : 25,
             'cost' : 5,
           },
           'medium' : {
+            'name' : 'Scale Armour',
             'defence' : 3,
             'weight' : 35,
             'cost' : 15,
           },
           'heavy' : {
+            'name' : 'Plate Armour',
             'defence' : 5,
             'weight' : 60,
             'cost' : 30,

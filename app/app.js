@@ -8,7 +8,10 @@
       'ngSanitize',
       'ngFileUpload',
       'ui.bootstrap',
-      'sewa.toolkit.controller'
+      'sewa.toolkit.controller',
+      'sewa.toolkit.balancer.controller',
+      'sewa.toolkit.designer.controller',
+      'sewa.toolkit.force.controller'
     ])
     .constant('_', window._)
     .constant('SEWA', {

@@ -1,0 +1,108 @@
+              <div class="col-sm-5">
+                <div class="designer-pane">
+                  <div id="primary" class="slot" uib-dropdown is-open="designer.slotStatus.primaryOpen">
+                    <button class="slot-action" type="button" uib-dropdown-toggle ng-disabled="disabled">
+                    </button>
+                    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="primary">
+                      <li ng-repeat="eq in designer.reference.equipment.primary track by $index" role="menuitem"><a href="#">{{eq.name}}</a></li>
+                    </ul>
+                  </div>
+                  <div id="armour" class="slot" uib-dropdown is-open="designer.slotStatus.armourOpen">
+                    <button class="slot-action" type="button" uib-dropdown-toggle ng-disabled="disabled">
+                    </button>
+                    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="armour">
+                      <li ng-repeat="eq in designer.reference.equipment.armour track by $index" role="menuitem"><a href="#">{{eq.name}}</a></li>
+                    </ul>
+                  </div>
+                  <div id="secondary" class="slot" uib-dropdown is-open="designer.slotStatus.secondaryOpen">
+                    <button class="slot-action" type="button" uib-dropdown-toggle ng-disabled="disabled">
+                    </button>
+                    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="secondary">
+                      <li ng-repeat="eq in designer.reference.equipment.secondary track by $index" role="menuitem"><a href="#">{{eq.name}}</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="btn btn-primary" ng-click="toolkit.saveTemplates()">Save templates</div>
+                <div class="btn btn-primary" ngf-select="toolkit.loadTemplates($file)">Upload templates</div>
+              </div>
+              <div class="col-sm-3">
+                <div class="d-select">
+                  <select>
+                    <option>Human</option>
+                    <option>Elf</option>
+                    <option>Dwarf</option>
+                    <option>Orc</option>
+                  </select>
+                  Preferred Race
+                </div>
+                <div class="d-select">
+                  <select>
+                    <option>Recruit</option>
+                    <option>Seasoned</option>
+                    <option>Regular</option>
+                    <option>Veteran</option>
+                    <option>Elite</option>
+                  </select>
+                  Training Level
+                </div>
+                <div class="d-select">
+                  <select>
+                    <option>Strength</option>
+                    <option>Endurance</option>
+                    <option>Wisdom</option>
+                    <option>Agility</option>
+                  </select>
+                  Training Focus
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="panel panel-default">
+                  <div class="panel-heading">Stats</div>
+                  <div class="panel-body">
+                    <div class="row text-center">
+                      <div class="col-sm-12">{{toolkit.unit.name}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-3">STR: {{toolkit.unit.stats.str}}</div>
+                      <div class="col-sm-3">END: {{toolkit.unit.stats.end}}</div>
+                      <div class="col-sm-3">WIS: {{toolkit.unit.stats.wis}}</div>
+                      <div class="col-sm-3">AGI: {{toolkit.unit.stats.agi}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">Figures: {{toolkit.unit.figures}}</div>
+                      <div class="col-sm-3">Cost: {{toolkit.unit.cost}}</div>
+                      <div class="col-sm-3">Upkeep: {{toolkit.unit.upkeep}}</div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-sm-6">Health: {{toolkit.unit.hp_max}} ({{toolkit.unit.hp_max * toolkit.unit.figures}})</div>
+                      <div class="col-sm-6">Current: {{toolkit.unit.hp_current}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">Hit Chance: {{toolkit.unit.to_hit}}%</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">Melee:
+                      {{toolkit.unit.melee_attacks}} ({{toolkit.unit.melee_attacks * toolkit.unit.figures}}),
+                      {{toolkit.unit.melee_attacks * toolkit.unit.melee_damage * toolkit.unit.to_hit / 200}} - {{toolkit.unit.melee_attacks * toolkit.unit.melee_damage * toolkit.unit.to_hit / 50}}
+                      </div>
+                      <div class="col-sm-6">Ranged: 0</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">Defence: {{toolkit.unit.defence}}</div>
+                      <div class="col-sm-6">Resistance: {{toolkit.unit.resistance}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">Encumbrance: {{toolkit.unit.weight}}/{{toolkit.unit.encumbrance}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">Initiative: {{toolkit.unit.initiative}}</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-12">Movement: {{toolkit.unit.movement}} ({{toolkit.unit.movement_type}})</div>
+                    </div>
+                    <hr>
+                    <pre>{{toolkit.unit | json}}</pre>
+                  </div>
+                </div>
+              </div>
