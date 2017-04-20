@@ -6,28 +6,40 @@
     .constant('TOOLKIT_CONSTANTS', {
       'races' : {
         'high_men' : {
-          'str' : 5,
-          'end' : 5,
-          'wis' : 4,
-          'agi' : 6
+          'name' : 'Human',
+          'stats' : {
+            'str' : 5,
+            'end' : 5,
+            'wis' : 4,
+            'agi' : 6
+          }
         },
         'orc' : {
-          'str' : 7,
-          'end' : 6,
-          'wis' : 3,
-          'agi' : 4
+          'name' : 'Orc',
+          'stats' : {
+            'str' : 7,
+            'end' : 6,
+            'wis' : 3,
+            'agi' : 4
+          }
         },
         'dwarf' : {
-          'str' : 4,
-          'end' : 7,
-          'wis' : 6,
-          'agi' : 4
+          'name' : 'Dwarf',
+          'stats' : {
+            'str' : 4,
+            'end' : 7,
+            'wis' : 6,
+            'agi' : 4
+          }
         },
         'high_elf' : {
-          'str' : 3,
-          'end' : 4,
-          'wis' : 6,
-          'agi' : 7
+          'name' : 'High Elf',
+          'stats' : {
+            'str' : 3,
+            'end' : 4,
+            'wis' : 6,
+            'agi' : 7
+          }
         },
       },
       'equipment' : {
@@ -66,6 +78,7 @@
         'secondary' : {
           'short_bow' : {
             'name' : 'Short Bow',
+            'symbol' : 'SB',
             'weight' : 40,
             'cost' : 20,
             'ranged_type' : 'missile',
@@ -75,6 +88,7 @@
           },
           'large_shield' : {
             'name' : 'Large Shield',
+            'symbol' : 'LSH',
             'weight' : 10,
             'cost' : 10,
             'defence' : 1,
@@ -84,24 +98,28 @@
         'armour' : {
           'none' : {
             'name' : 'Common Cloth',
+            'symbol' : 'Cl',
             'defence' : 1,
             'weight' : 10,
             'cost' : 0,
           },
           'light' : {
             'name' : 'Leather Armour',
+            'symbol' : 'LA',
             'defence' : 2,
             'weight' : 25,
             'cost' : 5,
           },
           'medium' : {
             'name' : 'Scale Armour',
+            'symbol' : 'SA',
             'defence' : 3,
             'weight' : 35,
             'cost' : 15,
           },
           'heavy' : {
             'name' : 'Plate Armour',
+            'symbol' : 'PL',
             'defence' : 5,
             'weight' : 60,
             'cost' : 30,
@@ -114,6 +132,7 @@
       },
       'templates' : {
         'irregular' : {
+          'name' : 'Irregular',
           'figures' : 8,
           'cost' : 0,
           'upkeep' : 0,
@@ -127,6 +146,7 @@
           'movement_type' : 'land'
         },
         'infantry' : {
+          'name' : 'Infantry',
           'figures' : 6,
           'cost' : 0,
           'upkeep' : 1,
@@ -152,28 +172,64 @@
           */
         },
         'infantry_elite' : {
-          'str' : 4,
-          'end' : 7,
-          'wis' : 6,
-          'agi' : 4
+          'name' : 'Elite Infantry',
+          'figures' : 6,
+          'cost' : 0,
+          'upkeep' : 1,
+          'equipment' : {
+            'primary' : 'common_sword',
+            'secondary' : 'large_shield',
+            'armour' : 'light'
+          },
+          'slots_available' : ['primary','secondary','armour'],
+          'hp_hearts' : 1,
+          'movement' : 1,
+          'movement_type' : 'land'
         },
         'cavalry' : {
-          'str' : 3,
-          'end' : 4,
-          'wis' : 6,
-          'agi' : 7
+          'name' : 'Cavalry',
+          'figures' : 6,
+          'cost' : 0,
+          'upkeep' : 1,
+          'equipment' : {
+            'primary' : 'common_sword',
+            'secondary' : 'large_shield',
+            'armour' : 'light'
+          },
+          'slots_available' : ['primary','secondary','armour'],
+          'hp_hearts' : 1,
+          'movement' : 1,
+          'movement_type' : 'land'
         },
         'cavalry_elite' : {
-          'str' : 3,
-          'end' : 4,
-          'wis' : 6,
-          'agi' : 7
+          'name' : 'Elite Cavalry',
+          'figures' : 6,
+          'cost' : 0,
+          'upkeep' : 1,
+          'equipment' : {
+            'primary' : 'common_sword',
+            'secondary' : 'large_shield',
+            'armour' : 'light'
+          },
+          'slots_available' : ['primary','secondary','armour'],
+          'hp_hearts' : 1,
+          'movement' : 1,
+          'movement_type' : 'land'
         },
         'archer' : {
-          'str' : 3,
-          'end' : 4,
-          'wis' : 6,
-          'agi' : 7
+          'name' : 'Archer',
+          'figures' : 6,
+          'cost' : 0,
+          'upkeep' : 1,
+          'equipment' : {
+            'primary' : 'common_sword',
+            'secondary' : 'large_shield',
+            'armour' : 'light'
+          },
+          'slots_available' : ['primary','secondary','armour'],
+          'hp_hearts' : 1,
+          'movement' : 1,
+          'movement_type' : 'land'
         },
         'shaman' : {
           'str' : 3,

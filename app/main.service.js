@@ -59,9 +59,13 @@
         var unit = angular.copy(setup);
         var template = TOOLKIT_CONSTANTS.templates[setup.template];
         
+        if (!setup.name) {
+          unit.name = TOOLKIT_CONSTANTS.races[setup.race].name + " " + template.name;
+        }
+        
         unit.figures = template.figures;
         unit.upkeep = template.upkeep;
-        unit.stats = TOOLKIT_CONSTANTS.races[setup.race];
+        unit.stats = TOOLKIT_CONSTANTS.races[setup.race].stats;
         
         unit.hp_hearts = template.hp_hearts;
         unit.hp_max = unit.hp_hearts * unit.stats.end;
@@ -72,19 +76,21 @@
         unit.melee_attacks = Math.floor(unit.stats.agi / 5);
         unit.defence = Math.floor(unit.stats.end / 10);
         
+        // TODO: hit bonus is too high
         unit.to_hit = unit.stats.agi * 5 + 5;
         unit.resistance = unit.stats.wis;
         
+        // TODO: Agi/move penalty based on encumb
         unit.encumbrance = unit.stats.end * 10 + unit.stats.str * 5 + 25;
         
         unit.movement = template.movement;
-        unit.movement_type = template.movement_type;        
+        unit.movement_type = template.movement_type;
         unit.initiative = 5; // TODO
         
         unit.cost = template.cost;
         unit.weight = 0;
         
-        unit.traits = [];        
+        unit.traits = [];
         if (template.traits) {
           unit.traits = _.union(unit.traits, template.traits);
         }
@@ -106,6 +112,9 @@
             }
             if (equip.melee_attacks) {
               unit.melee_attacks += equip.melee_attacks;
+            }
+            if (equip.defence) {
+              unit.defence += equip.defence;
             }
             // TODO: replace individual bonuses with 'bonus' object and _.each
             if (equip.bonus_defence) {

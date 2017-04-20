@@ -21,11 +21,11 @@
     vm.current = {
       'template' : 'infantry',
       'race' : 'high_men',
-      'name' : 'Unnamed',
+      'name' : '',
       'experience' : 50,
       'traits' : []
     };
-    vm.current.equipment = TOOLKIT_CONSTANTS.templates[vm.current.template].equipment;
+    vm.current.equipment = angular.copy(TOOLKIT_CONSTANTS.templates[vm.current.template].equipment);
     
     // controller functions
     regenerateUnit();
@@ -41,7 +41,7 @@
     
     $scope.$watch('designer.current.template', function(newValue, oldValue) {
       if ( newValue !== oldValue ) {
-        vm.current.equipment = TOOLKIT_CONSTANTS.templates[vm.current.template].equipment;
+        vm.current.equipment = angular.copy(TOOLKIT_CONSTANTS.templates[vm.current.template].equipment);
         regenerateUnit();
       }
     });
