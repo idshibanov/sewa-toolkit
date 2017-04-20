@@ -1,0 +1,55 @@
+.bs-header {
+  padding: 30px 15px 40px; /* side padding builds on .container 15px, so 30px */
+  font-size: 16px;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(0,0,0,.15);
+  color: #cdbfe3;
+  background-color: #563d7c;
+  background-image: url(../docs/header.png);
+  margin-bottom: 15px;
+}
+.d-select {
+  margin-bottom: 5px;
+}
+.d-select select {
+  width: 100px;
+}
+.designer-pane {
+  background-image: url(../docs/pipl.png);
+  background-repeat: no-repeat;
+  position: relative;
+  height: 300px;
+}
+.designer-pane .slot-action {
+  position: absolute;
+  width: 45px;
+  height: 45px;
+  background: #eee;
+  -webkit-box-shadow: inset 0px 0px 1px 3px rgba(0,0,0,0.81);
+  -moz-box-shadow: inset 0px 0px 1px 3px rgba(0,0,0,0.81);
+  box-shadow: inset 0px 0px 1px 3px rgba(0,0,0,0.81);
+}
+#armour.slot {
+  top: 80px;
+  left: 140px;
+}
+#primary.slot {
+  top: 80px;
+  left: 65px;
+}
+#secondary.slot {
+  top: 80px;
+  left: 215px;
+}
+
+.changeUp {
+  color: green;
+}
+.changeDown {
+  color: red;
+}
+
+.row.top-level {
+  padding: 10px;
+  padding-top: 20px;
+}

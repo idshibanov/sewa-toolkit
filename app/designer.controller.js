@@ -17,6 +17,8 @@
     vm.slotStatus = {};    
     vm.reference = TOOLKIT_CONSTANTS;
     
+    vm.selectedTemplate = 'infantry';
+    
     vm.unit = ToolkitService.generateUnitDefinition({
       'template' : 'infantry',
       'race' : 'high_men',
