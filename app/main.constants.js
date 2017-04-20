@@ -34,6 +34,7 @@
         'primary' : {
           'knife' : {
             'name' : 'Knife',
+            'symbol' : 'KN',
             'weight' : 5,
             'cost' : 0,
             'melee_damage' : 5,
@@ -41,6 +42,7 @@
           },
           'common_spear' : {
             'name' : 'Common Spear',
+            'symbol' : 'SPR',
             'weight' : 40,
             'cost' : 5,
             'melee_damage' : 5,
@@ -49,6 +51,7 @@
           },
           'common_sword' : {
             'name' : 'Common Sword',
+            'symbol' : 'SWD',
             'weight' : 15,
             'cost' : 10,
             'melee_damage' : 5,

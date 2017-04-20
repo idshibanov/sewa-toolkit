@@ -67,11 +67,12 @@
         unit.hp_max = unit.hp_hearts * unit.stats.end;
         unit.hp_current = unit.hp_max;
         
-        unit.melee_damage = this.getPrimary(template).melee_damage;
-        unit.melee_attacks = this.getPrimary(template).melee_attacks;
+        // TODO: fix formulas
+        unit.melee_damage = Math.floor(unit.stats.str / 3);
+        unit.melee_attacks = Math.floor(unit.stats.agi / 5);
+        unit.defence = Math.floor(unit.stats.end / 10);
         
         unit.to_hit = unit.stats.agi * 5 + 5;
-        unit.defence = this.getArmour(template).defence;
         unit.resistance = unit.stats.wis;
         
         unit.encumbrance = unit.stats.end * 10 + unit.stats.str * 5 + 25;
@@ -89,7 +90,7 @@
         }
         
         // Check equipment and adjust stats
-        _.each(template.equipment, function(val, key) {
+        _.each(unit.equipment, function(val, key) {
           var equip = TOOLKIT_CONSTANTS.equipment[key][val];
           if (equip) {
             unit.cost += equip.cost;
@@ -97,24 +98,25 @@
             if (equip.traits) {
               unit.traits = _.union(unit.traits, equip.traits);
             }
+            
+            // TODO: check if every slot/stats is appropriate (multiple weapons, etc)
+            // Should we replace base melee stats instead of adding??
+            if (equip.melee_damage) {
+              unit.melee_damage += equip.melee_damage;
+            }
+            if (equip.melee_attacks) {
+              unit.melee_attacks += equip.melee_attacks;
+            }
+            // TODO: replace individual bonuses with 'bonus' object and _.each
+            if (equip.bonus_defence) {
+              unit.defence += equip.bonus_defence;
+            }
           } else {
             console.log("Equipment reference not found! " + val + " in " + key);
           }
         });
         
         return unit;
-      },
-      getEquipmentList() {
-        return TOOLKIT_CONSTANTS.equipment;
-      },
-      getPrimary(template) {
-        return TOOLKIT_CONSTANTS.equipment.primary[template.equipment.primary];
-      },
-      getSecondary(template) {
-        return TOOLKIT_CONSTANTS.equipment.secondary[template.equipment.secondary];
-      },
-      getArmour(template) {
-        return TOOLKIT_CONSTANTS.equipment.armour[template.equipment.armour];
       },
       runDuel(aUnit, dUnit) {
         return 'aba';

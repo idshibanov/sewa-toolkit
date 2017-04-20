@@ -17,20 +17,46 @@
     vm.slotStatus = {};    
     vm.reference = TOOLKIT_CONSTANTS;
     
-    vm.selectedTemplate = 'infantry';
-    
-    vm.unit = ToolkitService.generateUnitDefinition({
+    // designer variables
+    vm.current = {
       'template' : 'infantry',
       'race' : 'high_men',
-      'name' : 'High Men Swordman',
+      'name' : 'Unnamed',
       'experience' : 50,
-      'equipment' : {
-        'primary' : 'common_sword',
-        'secondary' : 'large_shield',
-        'armour' : 'light'
-      },
-      'traits' : {
-        'large_shield' : 1,
+      'traits' : []
+    };
+    vm.current.equipment = TOOLKIT_CONSTANTS.templates[vm.current.template].equipment;
+    
+    // controller functions
+    regenerateUnit();
+    vm.selectItem = selectItem;
+    
+    function selectItem(slot, equipment) {
+      vm.current.equipment[slot] = equipment;
+    }
+    
+    function regenerateUnit() {
+      vm.unit = ToolkitService.generateUnitDefinition(vm.current);
+    };    
+    
+    $scope.$watch('designer.current.template', function(newValue, oldValue) {
+      if ( newValue !== oldValue ) {
+        vm.current.equipment = TOOLKIT_CONSTANTS.templates[vm.current.template].equipment;
+        regenerateUnit();
+      }
+    });
+    
+    $scope.$watchGroup(['designer.current.race'], function(newValue, oldValue) {
+      console.log(newValue);
+      console.log(oldValue);
+      if ( newValue !== oldValue ) {
+        regenerateUnit();
+      }
+    });
+    
+    $scope.$watchCollection('designer.current.equipment', function(newValue, oldValue) {
+      if ( newValue !== oldValue ) {
+        regenerateUnit();
       }
     });
   }

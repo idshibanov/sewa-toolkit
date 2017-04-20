@@ -13,8 +13,6 @@
   function ToolkitController(_, $scope, ToolkitService, SaveLoadService) {
     var vm = this;
     
-    vm.equipment = ToolkitService.getEquipmentList();
-    
     vm.unit = ToolkitService.generateUnitDefinition({
       'template' : 'infantry',
       'race' : 'high_men',
@@ -25,9 +23,7 @@
         'secondary' : 'large_shield',
         'armour' : 'light'
       },
-      'traits' : {
-        'large_shield' : 1,
-      }
+      'traits' : []
     });
     
     vm.saveTemplates = function () {

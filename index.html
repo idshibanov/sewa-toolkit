@@ -35,9 +35,9 @@
               <div class="col-sm-7">
                 <div class="row">
                   <div class="d-select">
-                    <label for="attackerSelect">Current unit:</label>
-                    <select name="attackerSelect" id="attackerSelect" ng-model="toolkit.unit1">
-                      <option ng-repeat="unit in toolkit.templates" value="{{unit.id}}">{{unit.name}}</option>
+                    <label for="currentSelect">Current unit:</label>
+                    <select name="currentSelect" id="currentSelect" ng-model="designer.selectedUnit">
+                      <option ng-repeat="unit in toolkit.templates track by $index" value="{{$index}}">{{unit.name}}</option>
                     </select>
                   <span class="btn btn-primary" ng-click="toolkit.saveTemplates()">Save templates</span>
                   <span class="btn btn-primary" ngf-select="toolkit.loadTemplates($file)">Upload templates</span>
@@ -47,19 +47,28 @@
                 <div class="row">
                   <div class="col-sm-7">
                     <div class="designer-pane">
-                      <div ng-repeat="slot in designer.reference.templates[designer.selectedTemplate].slots_available track by $index" 
+                      <div ng-repeat="slot in designer.reference.templates[designer.current.template].slots_available track by $index" 
                       id="{{slot}}" class="slot" uib-dropdown is-open="designer.slotStatus[slot]">
                         <button class="slot-action" type="button" uib-dropdown-toggle ng-disabled="disabled">
+                        {{designer.reference.equipment[slot][designer.current.equipment[slot]].symbol}}
                         </button>
                         <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="{{slot}}">
-                          <li ng-repeat="eq in designer.reference.equipment[slot] track by $index" role="menuitem"><a href="#">{{eq.name}}</a></li>
+                          <li ng-repeat="(eqID, eq) in designer.reference.equipment[slot] track by $index" ng-click="designer.selectItem(slot, eqID)" role="menuitem">
+                          <a href="#">{{eq.name}}</a>
+                          </li>
                         </ul>
                       </div>
                     </div>
                   </div>
                   <div class="col-sm-5">
                     <div class="d-select">
-                      <select name="raceSelect" id="raceSelect" ng-model="toolkit.unit1">
+                      <select name="templateSelect" id="templateSelect" ng-model="designer.current.template">
+                        <option ng-repeat="(id, template) in designer.reference.templates track by $index" value="{{id}}">{{template.name}}</option>
+                      </select>
+                      <label for="templateSelect">Unit Template</label>
+                    </div>
+                    <div class="d-select">
+                      <select name="raceSelect" id="raceSelect" ng-model="designer.current.race">
                         <option ng-repeat="(id, race) in designer.reference.races track by $index" value="{{id}}">{{race.name}}</option>
                       </select>
                       <label for="raceSelect">Preferred Race</label>
@@ -91,49 +100,49 @@
                   <div class="panel-heading">Stats</div>
                   <div class="panel-body">
                     <div class="row text-center">
-                      <div class="col-sm-12">{{toolkit.unit.name}}</div>
+                      <div class="col-sm-12">{{designer.unit.name}}</div>
                     </div>
                     <div class="row">
-                      <div class="col-sm-3">STR: {{toolkit.unit.stats.str}}</div>
-                      <div class="col-sm-3">END: {{toolkit.unit.stats.end}}</div>
-                      <div class="col-sm-3">WIS: {{toolkit.unit.stats.wis}}</div>
-                      <div class="col-sm-3">AGI: {{toolkit.unit.stats.agi}}</div>
+                      <div class="col-sm-3">STR: {{designer.unit.stats.str}}</div>
+                      <div class="col-sm-3">END: {{designer.unit.stats.end}}</div>
+                      <div class="col-sm-3">WIS: {{designer.unit.stats.wis}}</div>
+                      <div class="col-sm-3">AGI: {{designer.unit.stats.agi}}</div>
                     </div>
                     <div class="row">
-                      <div class="col-sm-6">Figures: {{toolkit.unit.figures}}</div>
-                      <div class="col-sm-3">Cost: {{toolkit.unit.cost}}</div>
-                      <div class="col-sm-3">Upkeep: {{toolkit.unit.upkeep}}</div>
+                      <div class="col-sm-6">Figures: {{designer.unit.figures}}</div>
+                      <div class="col-sm-3">Cost: {{designer.unit.cost}}</div>
+                      <div class="col-sm-3">Upkeep: {{designer.unit.upkeep}}</div>
                     </div>
                     <hr>
                     <div class="row">
-                      <div class="col-sm-6">Health: {{toolkit.unit.hp_max}} ({{toolkit.unit.hp_max * toolkit.unit.figures}})</div>
-                      <div class="col-sm-6">Current: {{toolkit.unit.hp_current}}</div>
+                      <div class="col-sm-6">Health: {{designer.unit.hp_max}} ({{designer.unit.hp_max * designer.unit.figures}})</div>
+                      <div class="col-sm-6">Current: {{designer.unit.hp_current}}</div>
                     </div>
                     <div class="row">
-                      <div class="col-sm-12">Hit Chance: {{toolkit.unit.to_hit}}%</div>
+                      <div class="col-sm-12">Hit Chance: {{designer.unit.to_hit}}%</div>
                     </div>
                     <div class="row">
                       <div class="col-sm-6">Melee:
-                      {{toolkit.unit.melee_attacks}} ({{toolkit.unit.melee_attacks * toolkit.unit.figures}}),
-                      {{toolkit.unit.melee_attacks * toolkit.unit.melee_damage * toolkit.unit.to_hit / 200}} - {{toolkit.unit.melee_attacks * toolkit.unit.melee_damage * toolkit.unit.to_hit / 50}}
+                      {{designer.unit.melee_attacks}} ({{designer.unit.melee_attacks * designer.unit.figures}}),
+                      {{designer.unit.melee_attacks * designer.unit.melee_damage * designer.unit.to_hit / 200}} - {{designer.unit.melee_attacks * designer.unit.melee_damage * designer.unit.to_hit / 50}}
                       </div>
                       <div class="col-sm-6">Ranged: 0</div>
                     </div>
                     <div class="row">
-                      <div class="col-sm-6">Defence: {{toolkit.unit.defence}}</div>
-                      <div class="col-sm-6">Resistance: {{toolkit.unit.resistance}}</div>
+                      <div class="col-sm-6">Defence: {{designer.unit.defence}}</div>
+                      <div class="col-sm-6">Resistance: {{designer.unit.resistance}}</div>
                     </div>
                     <div class="row">
-                      <div class="col-sm-12">Encumbrance: {{toolkit.unit.weight}}/{{toolkit.unit.encumbrance}}</div>
+                      <div class="col-sm-12">Encumbrance: {{designer.unit.weight}}/{{designer.unit.encumbrance}}</div>
                     </div>
                     <div class="row">
-                      <div class="col-sm-12">Initiative: {{toolkit.unit.initiative}}</div>
+                      <div class="col-sm-12">Initiative: {{designer.unit.initiative}}</div>
                     </div>
                     <div class="row">
-                      <div class="col-sm-12">Movement: {{toolkit.unit.movement}} ({{toolkit.unit.movement_type}})</div>
+                      <div class="col-sm-12">Movement: {{designer.unit.movement}} ({{designer.unit.movement_type}})</div>
                     </div>
                     <hr>
-                    <pre>{{toolkit.unit | json}}</pre>
+                    <pre>{{designer.unit | json}}</pre>
                   </div>
                 </div>
               </div>
