@@ -1,0 +1,43 @@
+<div>
+  <div class="row">
+    <div class="col-sm-3">STR: {{stats.unit.stats.str}}</div>
+    <div class="col-sm-3">END: {{stats.unit.stats.end}}</div>
+    <div class="col-sm-3">WIS: {{stats.unit.stats.wis}}</div>
+    <div class="col-sm-3">AGI: {{stats.unit.stats.agi}}</div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">Figures: {{stats.unit.figures}}</div>
+    <div class="col-sm-3">Cost: {{stats.unit.cost}}</div>
+    <div class="col-sm-3">Upkeep: {{stats.unit.upkeep}}</div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-sm-6">Health: {{stats.unit.hp_max}} ({{stats.unit.hp_max * stats.unit.figures}})</div>
+    <div class="col-sm-6">Current: {{stats.unit.hp_current}}</div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">Hit Chance: {{stats.unit.to_hit}}%</div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">Melee:
+    {{stats.unit.melee_attacks}} ({{stats.unit.melee_attacks * stats.unit.figures}}),
+    {{stats.unit.melee_attacks * stats.unit.melee_damage * stats.unit.to_hit / 200}} - {{stats.unit.melee_attacks * stats.unit.melee_damage * stats.unit.to_hit / 50}}
+    </div>
+    <div class="col-sm-6">Ranged: 0</div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">Defence: {{stats.unit.defence}}</div>
+    <div class="col-sm-6">Resistance: {{stats.unit.resistance}}</div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">Encumbrance: {{stats.unit.weight}}/{{stats.unit.encumbrance}}</div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">Initiative: {{stats.unit.initiative}}</div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">Movement: {{stats.unit.movement}} ({{stats.unit.movement_type}})</div>
+  </div>
+  <hr>
+  <pre>{{stats.unit | json}}</pre>
+</div>

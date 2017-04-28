@@ -16,8 +16,11 @@
     <script src="app/main.controller.js"></script>
     <script src="app/main.service.js"></script>
     <script src="app/saveload.service.js"></script>
+    <script src="app/stats-table.js"></script>
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/style.css" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
   </head>
   <body>
     <div role="main">
@@ -102,47 +105,7 @@
                     <div class="row text-center">
                       <div class="col-sm-12">{{designer.unit.name}}</div>
                     </div>
-                    <div class="row">
-                      <div class="col-sm-3">STR: {{designer.unit.stats.str}}</div>
-                      <div class="col-sm-3">END: {{designer.unit.stats.end}}</div>
-                      <div class="col-sm-3">WIS: {{designer.unit.stats.wis}}</div>
-                      <div class="col-sm-3">AGI: {{designer.unit.stats.agi}}</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-6">Figures: {{designer.unit.figures}}</div>
-                      <div class="col-sm-3">Cost: {{designer.unit.cost}}</div>
-                      <div class="col-sm-3">Upkeep: {{designer.unit.upkeep}}</div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                      <div class="col-sm-6">Health: {{designer.unit.hp_max}} ({{designer.unit.hp_max * designer.unit.figures}})</div>
-                      <div class="col-sm-6">Current: {{designer.unit.hp_current}}</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-12">Hit Chance: {{designer.unit.to_hit}}%</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-6">Melee:
-                      {{designer.unit.melee_attacks}} ({{designer.unit.melee_attacks * designer.unit.figures}}),
-                      {{designer.unit.melee_attacks * designer.unit.melee_damage * designer.unit.to_hit / 200}} - {{designer.unit.melee_attacks * designer.unit.melee_damage * designer.unit.to_hit / 50}}
-                      </div>
-                      <div class="col-sm-6">Ranged: 0</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-6">Defence: {{designer.unit.defence}}</div>
-                      <div class="col-sm-6">Resistance: {{designer.unit.resistance}}</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-12">Encumbrance: {{designer.unit.weight}}/{{designer.unit.encumbrance}}</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-12">Initiative: {{designer.unit.initiative}}</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-12">Movement: {{designer.unit.movement}} ({{designer.unit.movement_type}})</div>
-                    </div>
-                    <hr>
-                    <pre>{{designer.unit | json}}</pre>
+                    <stats-table unit="designer.unit"></stats-table>
                   </div>
                 </div>
               </div>
@@ -162,45 +125,7 @@
                         </select>
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="col-sm-3">STR: {{toolkit.unit.stats.str}}</div>
-                      <div class="col-sm-3">END: {{toolkit.unit.stats.end}}</div>
-                      <div class="col-sm-3">WIS: {{toolkit.unit.stats.wis}}</div>
-                      <div class="col-sm-3">AGI: {{toolkit.unit.stats.agi}}</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-6">Figures: {{toolkit.unit.figures}}</div>
-                      <div class="col-sm-3">Cost: {{toolkit.unit.cost}}</div>
-                      <div class="col-sm-3">Upkeep: {{toolkit.unit.upkeep}}</div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                      <div class="col-sm-6">Health: {{toolkit.unit.hp_max}} ({{toolkit.unit.hp_max * toolkit.unit.figures}})</div>
-                      <div class="col-sm-6">Current: {{toolkit.unit.hp_current}}</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-12">Hit Chance: {{toolkit.unit.to_hit}}%</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-6">Melee:
-                      {{toolkit.unit.melee_attacks}} ({{toolkit.unit.melee_attacks * toolkit.unit.figures}}),
-                      {{toolkit.unit.melee_attacks * toolkit.unit.melee_damage * toolkit.unit.to_hit / 200}} - {{toolkit.unit.melee_attacks * toolkit.unit.melee_damage * toolkit.unit.to_hit / 50}}
-                      </div>
-                      <div class="col-sm-6">Ranged: 0</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-6">Defence: {{toolkit.unit.defence}}</div>
-                      <div class="col-sm-6">Resistance: {{toolkit.unit.resistance}}</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-12">Encumbrance: {{toolkit.unit.weight}}/{{toolkit.unit.encumbrance}}</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-12">Initiative: {{toolkit.unit.initiative}}</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-12">Movement: {{toolkit.unit.movement}} ({{toolkit.unit.movement_type}})</div>
-                    </div>
+                    <stats-table unit="toolkit.unit"></stats-table>
                   </div>
                 </div>
               </div>
@@ -216,45 +141,7 @@
                     <div class="row text-center">
                       <div class="col-sm-12">{{toolkit.unit.name}}</div>
                     </div>
-                    <div class="row">
-                      <div class="col-sm-3">STR: {{toolkit.unit.stats.str}}</div>
-                      <div class="col-sm-3">END: {{toolkit.unit.stats.end}}</div>
-                      <div class="col-sm-3">WIS: {{toolkit.unit.stats.wis}}</div>
-                      <div class="col-sm-3">AGI: {{toolkit.unit.stats.agi}}</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-6">Figures: {{toolkit.unit.figures}}</div>
-                      <div class="col-sm-3">Cost: {{toolkit.unit.cost}}</div>
-                      <div class="col-sm-3">Upkeep: {{toolkit.unit.upkeep}}</div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                      <div class="col-sm-6">Health: {{toolkit.unit.hp_max}} ({{toolkit.unit.hp_max * toolkit.unit.figures}})</div>
-                      <div class="col-sm-6">Current: {{toolkit.unit.hp_current}}</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-12">Hit Chance: {{toolkit.unit.to_hit}}%</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-6">Melee:
-                      {{toolkit.unit.melee_attacks}} ({{toolkit.unit.melee_attacks * toolkit.unit.figures}}),
-                      {{toolkit.unit.melee_attacks * toolkit.unit.melee_damage * toolkit.unit.to_hit / 200}} - {{toolkit.unit.melee_attacks * toolkit.unit.melee_damage * toolkit.unit.to_hit / 50}}
-                      </div>
-                      <div class="col-sm-6">Ranged: 0</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-6">Defence: {{toolkit.unit.defence}}</div>
-                      <div class="col-sm-6">Resistance: {{toolkit.unit.resistance}}</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-12">Encumbrance: {{toolkit.unit.weight}}/{{toolkit.unit.encumbrance}}</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-12">Initiative: {{toolkit.unit.initiative}}</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-12">Movement: {{toolkit.unit.movement}} ({{toolkit.unit.movement_type}})</div>
-                    </div>
+                    <stats-table unit="toolkit.unit"></stats-table>
                   </div>
                 </div>
               </div>
@@ -269,45 +156,7 @@
                     <div class="row text-center">
                       <div class="col-sm-12">{{toolkit.unit.name}}</div>
                     </div>
-                    <div class="row">
-                      <div class="col-sm-3">STR: {{toolkit.unit.stats.str}}</div>
-                      <div class="col-sm-3">END: {{toolkit.unit.stats.end}}</div>
-                      <div class="col-sm-3">WIS: {{toolkit.unit.stats.wis}}</div>
-                      <div class="col-sm-3">AGI: {{toolkit.unit.stats.agi}}</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-6">Figures: {{toolkit.unit.figures}}</div>
-                      <div class="col-sm-3">Cost: {{toolkit.unit.cost}}</div>
-                      <div class="col-sm-3">Upkeep: {{toolkit.unit.upkeep}}</div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                      <div class="col-sm-6">Health: {{toolkit.unit.hp_max}} ({{toolkit.unit.hp_max * toolkit.unit.figures}})</div>
-                      <div class="col-sm-6">Current: {{toolkit.unit.hp_current}}</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-12">Hit Chance: {{toolkit.unit.to_hit}}%</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-6">Melee:
-                      {{toolkit.unit.melee_attacks}} ({{toolkit.unit.melee_attacks * toolkit.unit.figures}}),
-                      {{toolkit.unit.melee_attacks * toolkit.unit.melee_damage * toolkit.unit.to_hit / 200}} - {{toolkit.unit.melee_attacks * toolkit.unit.melee_damage * toolkit.unit.to_hit / 50}}
-                      </div>
-                      <div class="col-sm-6">Ranged: 0</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-6">Defence: {{toolkit.unit.defence}}</div>
-                      <div class="col-sm-6">Resistance: {{toolkit.unit.resistance}}</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-12">Encumbrance: {{toolkit.unit.weight}}/{{toolkit.unit.encumbrance}}</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-12">Initiative: {{toolkit.unit.initiative}}</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-12">Movement: {{toolkit.unit.movement}} ({{toolkit.unit.movement_type}})</div>
-                    </div>
+                    <stats-table unit="toolkit.unit"></stats-table>
                   </div>
                 </div>
               </div>
@@ -323,45 +172,7 @@
                     <div class="row text-center">
                       <div class="col-sm-12">{{toolkit.unit.name}}</div>
                     </div>
-                    <div class="row">
-                      <div class="col-sm-3">STR: {{toolkit.unit.stats.str}}</div>
-                      <div class="col-sm-3">END: {{toolkit.unit.stats.end}}</div>
-                      <div class="col-sm-3">WIS: {{toolkit.unit.stats.wis}}</div>
-                      <div class="col-sm-3">AGI: {{toolkit.unit.stats.agi}}</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-6">Figures: {{toolkit.unit.figures}}</div>
-                      <div class="col-sm-3">Cost: {{toolkit.unit.cost}}</div>
-                      <div class="col-sm-3">Upkeep: {{toolkit.unit.upkeep}}</div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                      <div class="col-sm-6">Health: {{toolkit.unit.hp_max}} ({{toolkit.unit.hp_max * toolkit.unit.figures}})</div>
-                      <div class="col-sm-6">Current: {{toolkit.unit.hp_current}}</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-12">Hit Chance: {{toolkit.unit.to_hit}}%</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-6">Melee:
-                      {{toolkit.unit.melee_attacks}} ({{toolkit.unit.melee_attacks * toolkit.unit.figures}}),
-                      {{toolkit.unit.melee_attacks * toolkit.unit.melee_damage * toolkit.unit.to_hit / 200}} - {{toolkit.unit.melee_attacks * toolkit.unit.melee_damage * toolkit.unit.to_hit / 50}}
-                      </div>
-                      <div class="col-sm-6">Ranged: 0</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-6">Defence: {{toolkit.unit.defence}}</div>
-                      <div class="col-sm-6">Resistance: {{toolkit.unit.resistance}}</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-12">Encumbrance: {{toolkit.unit.weight}}/{{toolkit.unit.encumbrance}}</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-12">Initiative: {{toolkit.unit.initiative}}</div>
-                    </div>
-                    <div class="row">
-                      <div class="col-sm-12">Movement: {{toolkit.unit.movement}} ({{toolkit.unit.movement_type}})</div>
-                    </div>
+                    <stats-table unit="toolkit.unit"></stats-table>
                   </div>
                 </div>
               </div>

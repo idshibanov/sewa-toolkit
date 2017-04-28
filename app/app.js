@@ -11,7 +11,8 @@
       'sewa.toolkit.controller',
       'sewa.toolkit.balancer.controller',
       'sewa.toolkit.designer.controller',
-      'sewa.toolkit.force.controller'
+      'sewa.toolkit.force.controller',
+      'sewa.directives.statsTable'
     ])
     .constant('_', window._)
     .constant('SEWA', {
