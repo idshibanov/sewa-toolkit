@@ -19,30 +19,44 @@
     
     // designer variables
     vm.current = {
-      'template' : 'infantry',
-      'race' : 'high_men',
-      'name' : '',
-      'experience' : 50,
-      'traits' : []
+      'template' : 'infantry'
     };
-    vm.current.equipment = angular.copy(TOOLKIT_CONSTANTS.templates[vm.current.template].equipment);
+    vm.unitID = null;
     
     // controller functions
-    regenerateUnit();
+    resetTemplate();
     vm.selectItem = selectItem;
+    vm.saveCurrent = saveCurrent;
+    vm.resetTemplate = resetTemplate;
     
     function selectItem(slot, equipment) {
       vm.current.equipment[slot] = equipment;
     }
     
+    function saveCurrent() {
+      $scope.$emit("createdOrUpdateUnit", vm.unitID, ToolkitService.generateUnitDefinition(vm.current));
+    }
+    
+    function resetTemplate() {
+      vm.current.race = 'high_men';
+      vm.current.name = vm.reference.races['high_men'].name + " " + vm.reference.templates[vm.current.template].name;
+      vm.current.experience = 50;
+      vm.current.traits = [];
+      vm.current.equipment = angular.copy(TOOLKIT_CONSTANTS.templates[vm.current.template].equipment);
+      regenerateUnit();
+    }
+    
     function regenerateUnit() {
       vm.unit = ToolkitService.generateUnitDefinition(vm.current);
-    };    
+    };
+    
+    $scope.$on("savedUnit", function(ev, id) {
+      vm.unitID = id;
+    });
     
     $scope.$watch('designer.current.template', function(newValue, oldValue) {
       if ( newValue !== oldValue ) {
-        vm.current.equipment = angular.copy(TOOLKIT_CONSTANTS.templates[vm.current.template].equipment);
-        regenerateUnit();
+        resetTemplate();
       }
     });
     

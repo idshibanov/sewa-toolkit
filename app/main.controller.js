@@ -26,6 +26,8 @@
       'traits' : []
     });
     
+    vm.templates = [];
+    
     vm.saveTemplates = function () {
       SaveLoadService.saveJson(vm.unit);
     };
@@ -39,6 +41,14 @@
           });
       }
     };
+    
+    $scope.$on("createdOrUpdateUnit", function(ev, id, unit) {
+      if (_.has(vm.templates, id)) {
+        vm.templates[id] = unit;
+      } else {
+        $scope.$broadcast("savedUnit", vm.templates.push(unit) - 1);
+      }
+    });
   }
 
 })();

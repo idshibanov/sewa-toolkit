@@ -7,53 +7,7 @@
 
   ToolkitService.$inject = ['TOOLKIT_CONSTANTS', '_'];
 
-  /*
-  'full_unit' : {
-    'template' : 'infantry',
-    'race' : 'high_men',
-    'figures' : 6,
-    'cost' : 20,
-    'upkeep' : 1,
-    'experience' : 50,
-    'stats' : {
-      'str' : 5,
-      'end' : 5,
-      'wis' : 5,
-      'agi' : 5
-    },
-    'hp_hearts' : 1,
-    'hp_max' : 5,
-    'hp_current' : 5,
-    'melee_damage' : 5,
-    'melee_attacks' : 3,
-    'to_hit' : 0.3,
-    'defence' : 2,
-    'resistance' : 4,
-    'movement' : 1,
-    'movement_type' : 'land',
-    'initiative' : 5,
-    'encumbrance' : 100,
-    'traits' : {
-      'large_shield' : 1,
-    }
-  },
-  'swordmen' : {
-    'template' : 'infantry',
-    'race' : 'high_men',
-    'name' : 'High Men Swordman',
-    'experience' : 50,
-    'equipment' : {
-      'weapon1' : 'common_sword',
-      'weapon2' : 'large_shield',
-      'armour' : 'light',
-      'mount' : 'none',
-    },
-    'traits' : {
-      'large_shield' : 1,
-    }
-  },
-  */
-  function ToolkitService(TOOLKIT_CONSTANTS, _) {
+  function ToolkitService(TOOLKIT_CONSTANTS, _) {    
     return {
       generateUnitDefinition: function(setup) {
         var unit = angular.copy(setup);

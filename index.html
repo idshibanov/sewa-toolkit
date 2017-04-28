@@ -39,8 +39,8 @@
                 <div class="row">
                   <div class="d-select">
                     <label for="currentSelect">Current unit:</label>
-                    <select name="currentSelect" id="currentSelect" ng-model="designer.selectedUnit">
-                      <option ng-repeat="unit in toolkit.templates track by $index" value="{{$index}}">{{unit.name}}</option>
+                    <select name="currentSelect" id="currentSelect" ng-model="designer.unitID" ng-options="id*1 as unit.name for (id, unit) in toolkit.templates">
+                      <option value="" selected="selected">New</option>
                     </select>
                   <span class="btn btn-primary" ng-click="toolkit.saveTemplates()">Save templates</span>
                   <span class="btn btn-primary" ngf-select="toolkit.loadTemplates($file)">Upload templates</span>
@@ -102,8 +102,14 @@
                 <div class="panel panel-default">
                   <div class="panel-heading">Stats</div>
                   <div class="panel-body">
-                    <div class="row text-center">
-                      <div class="col-sm-12">{{designer.unit.name}}</div>
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="unitName" ng-model="designer.current.name">
+                      <span class="input-group-btn">
+                        <button class="btn btn-primary" type="button" ng-click="designer.saveCurrent()">Save</button>
+                        <button class="btn btn-primary" type="button" ng-click="designer.resetTemplate()">Reset</button>
+                      </span>
+                    </div>
+                    <div class="form-group">
                     </div>
                     <stats-table unit="designer.unit"></stats-table>
                   </div>
