@@ -29,15 +29,15 @@
     vm.templates = [];
     
     vm.saveTemplates = function () {
-      SaveLoadService.saveJson(vm.unit);
+      SaveLoadService.saveJson(vm.templates);
     };
     
     vm.loadTemplates = function (file) {
       if (file) {
         SaveLoadService.loadFile(file, $scope)
           .then(function(result) {
-            vm.unit3 = SaveLoadService.parseJson(result);
-            console.log(vm.unit3);
+            var json = SaveLoadService.parseJson(result);
+            if (json) vm.templates = json;
           });
       }
     };

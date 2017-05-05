@@ -175,11 +175,11 @@
           'name' : 'Elite Infantry',
           'figures' : 6,
           'cost' : 0,
-          'upkeep' : 1,
+          'upkeep' : 2,
           'equipment' : {
             'primary' : 'common_sword',
             'secondary' : 'large_shield',
-            'armour' : 'light'
+            'armour' : 'medium'
           },
           'slots_available' : ['primary','secondary','armour'],
           'hp_hearts' : 1,
@@ -188,9 +188,9 @@
         },
         'cavalry' : {
           'name' : 'Cavalry',
-          'figures' : 6,
+          'figures' : 4,
           'cost' : 0,
-          'upkeep' : 1,
+          'upkeep' : 2,
           'equipment' : {
             'primary' : 'common_sword',
             'secondary' : 'large_shield',
@@ -203,9 +203,9 @@
         },
         'cavalry_elite' : {
           'name' : 'Elite Cavalry',
-          'figures' : 6,
+          'figures' : 4,
           'cost' : 0,
-          'upkeep' : 1,
+          'upkeep' : 4,
           'equipment' : {
             'primary' : 'common_sword',
             'secondary' : 'large_shield',
@@ -222,8 +222,8 @@
           'cost' : 0,
           'upkeep' : 1,
           'equipment' : {
-            'primary' : 'common_sword',
-            'secondary' : 'large_shield',
+            'primary' : 'knife',
+            'secondary' : 'short_bow',
             'armour' : 'light'
           },
           'slots_available' : ['primary','secondary','armour'],

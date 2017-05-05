@@ -109,8 +109,6 @@
                         <button class="btn btn-primary" type="button" ng-click="designer.resetTemplate()">Reset</button>
                       </span>
                     </div>
-                    <div class="form-group">
-                    </div>
                     <stats-table unit="designer.unit"></stats-table>
                   </div>
                 </div>
@@ -123,31 +121,31 @@
                 <div class="panel panel-default">
                   <div class="panel-heading">Stats</div>
                   <div class="panel-body">
-                    <div class="row text-center">
-                      <div class="d-select">
-                        <label for="attackerSelect">Attacker:</label>
-                        <select name="attackerSelect" id="attackerSelect" ng-model="toolkit.unit1">
-                          <option ng-repeat="unit in toolkit.templates" value="{{unit.id}}">{{unit.name}}</option>
-                        </select>
-                      </div>
+                    <div class="form-group">
+                      <label for="attackerSelect">Attacker:</label>
+                      <select name="attackerSelect" class="form-control" id="attackerSelect" ng-model="balancer.atkID" ng-options="id*1 as unit.name for (id, unit) in toolkit.templates">
+                      </select>
                     </div>
-                    <stats-table unit="toolkit.unit"></stats-table>
+                    <stats-table unit="balancer.attacker"></stats-table>
                   </div>
                 </div>
               </div>
               <div class="col-sm-6">
+                <button class="btn btn-primary" type="button" ng-click="balancer.executeDuel()">Match</button>
                 <pre>
-                {{toolkit.combatlog}}
+                {{balancer.combatlog}}
                 </pre>
               </div>
               <div class="col-sm-3">
                 <div class="panel panel-default">
                   <div class="panel-heading">Stats</div>
                   <div class="panel-body">
-                    <div class="row text-center">
-                      <div class="col-sm-12">{{toolkit.unit.name}}</div>
+                    <div class="form-group">
+                      <label for="defenderSelect">Defender:</label>
+                      <select name="defenderSelect" class="form-control" id="defenderSelect" ng-model="balancer.defID" ng-options="id*1 as unit.name for (id, unit) in toolkit.templates">
+                      </select>
                     </div>
-                    <stats-table unit="toolkit.unit"></stats-table>
+                    <stats-table unit="balancer.defender"></stats-table>
                   </div>
                 </div>
               </div>
